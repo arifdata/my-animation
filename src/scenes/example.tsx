@@ -1,12 +1,24 @@
 import {Circle, makeScene2D} from '@motion-canvas/2d';
-import {createRef} from '@motion-canvas/core';
+import {all, createRef} from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
-  // Create your animations here
+  const myCircle = createRef<Circle>();
 
-  const circle = createRef<Circle>();
+  view.add(
+    <Circle
+      ref={myCircle}
 
-  view.add(<Circle ref={circle} size={320} fill={'lightseagreen'} />);
+      x={-300}
+      width={140}
+      height={140}
+      fill="#ff0000"
 
-  yield* circle().scale(2, 2).to(1, 2);
+    />
+    
+  );
+
+  yield* all(
+    myCircle().position.x(300, 1).to(-300, 1),
+    myCircle().fill('#00ff00', 1).to('#0000ff', 1)
+  )
 });
