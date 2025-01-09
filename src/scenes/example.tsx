@@ -1,5 +1,5 @@
 import {Circle, makeScene2D} from '@motion-canvas/2d';
-import {all, createRef} from '@motion-canvas/core';
+import {all, createRef, ThreadGenerator} from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
   const myCircle = createRef<Circle>();
@@ -7,18 +7,21 @@ export default makeScene2D(function* (view) {
   view.add(
     <Circle
       ref={myCircle}
-
-      x={-300}
-      width={140}
-      height={140}
-      fill="#ff0000"
-
+      width={100}
+      height={100}
     />
-    
   );
 
-  yield* all(
-    myCircle().position.x(300, 1).to(-300, 1),
-    myCircle().fill('#00ff00', 1).to('#0000ff', 1)
-  )
+  yield* flicker(myCircle());
+
+
 });
+
+function* flicker(c: Circle): ThreadGenerator {
+  c.fill('red');
+  yield;
+  c.fill('blue');
+  yield;
+  c.fill('green');
+  yield;
+}
