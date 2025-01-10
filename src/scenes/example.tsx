@@ -1,34 +1,27 @@
-import { makeScene2D, Rect } from "@motion-canvas/2d";
-import { all, waitUntil, makeRef, range, loop, linear } from "@motion-canvas/core";
+import { makeScene2D, Circle } from "@motion-canvas/2d";
+import { createRef, all, easeInQuad, easeInOutBounce } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
-  view.fill("#FFFFFF");
-  const rects: Rect[] = [];
+  const c = createRef<Circle>();
 
+  view.fill("#212121");
   view.add(
-    range(5).map(i => (
-      <Rect
-        ref={makeRef(rects, i)}
-        width={10}
-        height={10}
-        x={-250 + 125 * i}
-        stroke={"#FF0000"}
-        lineWidth={1}
-        // fill={"#ff0000"}
-        // radius={10}
-      />
-    )),
+    <Circle
+      ref={c}
+      fill={"#A35C7A"}
+      width ={1}
+      height={1}
+      x={getRandomNumber(-500, 500)}
+      y={getRandomNumber(-500, 500)}
+    />
   );
-
-  yield* waitUntil('waktu tunggu');
-
-  // yield loop(
-    // () => view.fill("#ff0000", 0.5, linear).to("#00ff00", 0.5, linear),
-  // );
 
   yield* all(
-    // ...rects.map(rect => rect.position.y(200, 10)),
-    ...rects.map(rect => rect.scale(10, 0.5)),
-    // ...rects.map(rect => rect.position.y(200, 2)),
+    c().position([getRandomNumber(-1000, 1000), getRandomNumber(-500, 500)], 1, easeInQuad),
+    c().scale(100, 1),
   );
 });
+
+function getRandomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

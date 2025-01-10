@@ -1,10 +1,5 @@
 {
   "version": 0,
-  "timeEvents": [
-    {
-      "name": "waktu tunggu",
-      "targetTime": 0.13657456339020582
-    }
-  ],
+  "timeEvents": [],
   "seed": 1757189451
 }
