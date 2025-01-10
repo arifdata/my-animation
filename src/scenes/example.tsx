@@ -1,5 +1,5 @@
 import { makeScene2D, Rect } from "@motion-canvas/2d";
-import { all, waitFor, makeRef, range, loop, linear } from "@motion-canvas/core";
+import { all, waitUntil, makeRef, range, loop, linear } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   view.fill("#FFFFFF");
@@ -20,7 +20,7 @@ export default makeScene2D(function* (view) {
     )),
   );
 
-  yield* waitFor(1);
+  yield* waitUntil('waktu tunggu');
 
   // yield loop(
     // () => view.fill("#ff0000", 0.5, linear).to("#00ff00", 0.5, linear),
