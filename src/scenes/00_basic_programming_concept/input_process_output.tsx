@@ -1,5 +1,6 @@
 import {makeScene2D, Camera, Circle, Rect, Layout, Txt} from '@motion-canvas/2d';
-import {all, chain, createRef, waitFor} from '@motion-canvas/core';
+import {all, chain, createRef, waitFor } from '@motion-canvas/core';
+import { appear, disappear } from '../../utils/anims';
 
 export default makeScene2D(function* (view) {
   const cam = createRef<Camera>();
@@ -19,9 +20,9 @@ export default makeScene2D(function* (view) {
         <Layout layout ref={l} direction={'row'} alignItems={'center'} gap={100}>
 
           <Rect ref={r} size={300} fill={'#001219'} />
-          <Rect layout ref={r1} size={0} fill={'#001219'} alignItems={'center'} direction={'column'}>
+          <Rect layout ref={r1} size={300} fill={'#001219'} alignItems={'center'} direction={'column'}>
             <Circle size={100} fill={'#ff0000'} />
-            {/* <Txt fill={'ff0000'}>Hahaha</Txt> */}
+            <Txt fill={'#ff0000'} text={"Text coba"} fontSize={64}/>
           </Rect>
 
           <Rect ref={r2} size={500} fill={'#001219'} />
@@ -31,6 +32,12 @@ export default makeScene2D(function* (view) {
       </Camera>
 
     </>
+  );
+
+  yield* all(
+    appear(r()),
+    appear(r1()),
+    appear(r2()),
   );
 
   // yield* waitFor(1);
@@ -49,10 +56,14 @@ export default makeScene2D(function* (view) {
   yield* cam().zoom(0.5, 1);
 
   yield* chain(
-    r().size(0, 0.3),
-    r1().size(0, 0.3),
-    r2().size(0, 0.3),
+    // r().size(0, 0.3),
+    // r1().size(0, 0.3),
+    // r2().size(0, 0.3),
+    disappear(r()),
+    disappear(r1()),
+    disappear(r2()),
   );
   yield* waitFor(1);
 
 });
+
