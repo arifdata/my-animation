@@ -2,6 +2,7 @@ import {makeScene2D, Camera, Circle, Rect, Layout, Txt} from '@motion-canvas/2d'
 import {all, chain, createRef, easeInOutCubic, linear, waitFor } from '@motion-canvas/core';
 import { appear, disappear, textDisappear } from '../../utils/anims';
 import { ATxt } from '../../utils/nodes/ATxt';
+import { white, black, blue, orange, red } from '../../color-palettes/five-colorful';
 
 export default makeScene2D(function* (view) {
   const cam = createRef<Camera>();
@@ -11,15 +12,15 @@ export default makeScene2D(function* (view) {
 
   var v = view;
 
-  v.fill('#0000ff');
+  v.fill(white);
 
   v.add(
     <>
       <Camera ref={cam}>
 
 
-          <Rect ref={r1} size={300} fill={'#001219'} radius={30}>
-            <ATxt ref={ww} scale={0}>Coba Custom Text</ATxt>
+          <Rect ref={r1} size={300} fill={red} radius={30}>
+            <ATxt ref={ww} scale={0}>Input</ATxt>
           </Rect>
 
           <Circle ref={cc}
@@ -61,7 +62,7 @@ export default makeScene2D(function* (view) {
   yield* all(
     ww().scale(5, 1, easeInOutCubic),
   );
-  yield* ww().text("Coba ganti teks", 1);
+  yield* ww().text("Coba ganti 😎 teks", 1);
 
   yield* cam().followCurve(cc(), 5, linear);
 
