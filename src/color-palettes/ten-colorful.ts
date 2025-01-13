@@ -1,0 +1,10 @@
+export const black = '#001219';
+export const darkBlue = '#005F73';
+export const blue = '#0A9396';
+export const lightBlue = '#94D2BD';
+export const gray = '#E9D8A6';
+export const yellow = '#EE9B00';
+export const orange = '#CA6702';
+export const thickOrange = '#BB3E03';
+export const reddish = '#AE2012';
+export const maroon = '#9B2226';

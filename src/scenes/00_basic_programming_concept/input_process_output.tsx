@@ -1,8 +1,8 @@
 import {makeScene2D, Camera, Circle, Rect, Layout, Txt} from '@motion-canvas/2d';
-import {all, chain, createRef, easeInOutCubic, linear, waitFor } from '@motion-canvas/core';
+import {all, chain, createRef, easeInOutCirc, easeInOutCubic, easeInOutExpo, linear, waitFor } from '@motion-canvas/core';
 import { appear, disappear, textDisappear } from '../../utils/anims';
 import { ATxt } from '../../utils/nodes/ATxt';
-import { white, black, blue, orange, red } from '../../color-palettes/five-colorful';
+import { black, gray, darkBlue, lightBlue, blue, orange, maroon, yellow, reddish, thickOrange } from '../../color-palettes/ten-colorful';
 
 export default makeScene2D(function* (view) {
   const cam = createRef<Camera>();
@@ -12,15 +12,15 @@ export default makeScene2D(function* (view) {
 
   var v = view;
 
-  v.fill(white);
+  v.fill(black);
 
   v.add(
     <>
       <Camera ref={cam}>
 
 
-          <Rect ref={r1} size={300} fill={red} radius={30}>
-            <ATxt ref={ww} scale={0}>Input</ATxt>
+          <Rect layout paddingTop={20} paddingLeft={20} ref={r1} width={300} height={300} fill={thickOrange} smoothCorners={true} radius={30} >
+            <ATxt ref={ww} scale={0} fill={gray}>Input</ATxt>
           </Rect>
 
           <Circle ref={cc}
@@ -40,9 +40,23 @@ export default makeScene2D(function* (view) {
     appear(r1()),
   );
 
-  yield* ww().scale(1, 1);
+
 
   yield* r1().size(500, 1);
+
+  // yield* ww().position(r1().topLeft().add([70, 30]), 1, easeInOutCirc);
+
+  yield* ww().scale(1, 1);
+  yield* r1().ripple();
+
+  yield* ww().text("Menyengsarakan", 1);
+
+  yield* all(
+    r1().rotation(360, 2, easeInOutCubic),
+    r1().position.x(300, 2, easeInOutCubic),
+  );
+
+  // yield* r1().rotation(360, 2, easeInOutCubic);
 
   // yield* r().ripple();
   yield* all(
@@ -51,11 +65,14 @@ export default makeScene2D(function* (view) {
 
   yield* cam().reset(1);
 
-  yield* chain(
+  yield* r1().scale(0.1, 1);
+
+  yield* all(
     // r().size(0, 0.3),
     // r1().size(0, 0.3),
     // r2().size(0, 0.3),
     disappear(r1()),
+    textDisappear(ww()),
   );
   yield* waitFor(1);
 

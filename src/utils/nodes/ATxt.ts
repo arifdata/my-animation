@@ -1,8 +1,7 @@
 import {Txt, withDefaults} from '@motion-canvas/2d';
-import { black } from '../../color-palettes/five-colorful';
 
 export const ATxt = withDefaults(Txt, {
-  fill: black,
+  fill: 'rgba(255, 255, 255, 0.6)',
   fontFamily: 'JetBrains Mono',
   fontWeight: 700,
   height: 40,
