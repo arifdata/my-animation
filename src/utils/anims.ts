@@ -14,7 +14,7 @@ export function* disappear(object: Shape, duration = 0.5): ThreadGenerator {
 
     yield* all(
       object.size(objSize).size(0, duration, easeInOutCubic),
-      object.rotation(90, duration),
+      // object.rotation(90, duration),
     );
 
 }
