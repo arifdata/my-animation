@@ -75,7 +75,9 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1);
 
   yield* all(
-    ...workBookChildRef.map(item => item().opacity(1, 0.5, easeInOutCubic))
+    ...workBookChildRef.map(item => item().opacity(1, 0.5, easeInOutCubic)),
+    txt().text("Inside Workbook Object 🔍", 0.5),
+    txt().x(() => xParent() - 140, 0.5),
   );
 
   yield* waitFor(1);
@@ -95,6 +97,7 @@ export default makeScene2D(function* (view) {
     rect().height(100, 0.5),
     txt().x(() => xParent() - 80, 0.5),
     txt().y(() => yParent() - 80, 0.5),
+    txt().text("Workbook", 0.3),
   );
 
   yield* waitFor(1);
