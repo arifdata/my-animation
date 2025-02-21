@@ -9,47 +9,52 @@ export default makeScene2D(function* (view) {
   const txt = createRef<Txt>();
   const txt2 = createRef<Txt>();
   const rect = createRef<Rect>();
+  const xParent = createSignal(800);
+  const yParent = createSignal(0);
   //
   view.fill(white);
 
   view.add(
     <>
-      <Rect ref={rect} width={500} height={100} fill={red} radius={15} x={-1000}>
-        <ATxt ref={txt} fill={black} scale={0.8} text={"load_workbook()"}></ATxt>
-        <ATxt ref={txt2} fill={black} scale={0.8} text={'"sales_data.xlsx"'} y={-500} x={-800}></ATxt>
-      </Rect>
+      <Rect ref={rect} width={500} height={100} fill={red} radius={15} x={() => xParent()} y={() => yParent()}></Rect>
+      <ATxt ref={txt} fill={black} scale={0.8} text={'load_workbook'} x={() => xParent() - 160} y={() => yParent() - 70}></ATxt>
+      <ATxt ref={txt2} fill={black} scale={0.8} text={'Excel File'} y={-300} x={800}></ATxt>
     </>
   );
 
-  yield* rect().x(0, 1, easeInOutCubic);
+  yield* xParent(0, 1, easeInOutCubic);
+
+  yield* txt2().x(350, 0.7, easeInOutCubic);
+
   yield* waitFor(1);
-  yield* txt2().x(-350, 0.4, easeInOutCubic);
-  // yield* txt().text('load_workbook("sales_data.xlsx")', 0.5);
+
+  yield* txt2().text(`"drug_sales.xlsx"`, 0.7);
+
   yield* waitFor(1);
+
   yield* chain(
     all(
-      txt2().x(0, 0.7, easeInOutCubic),
-      txt2().y(0, 0.7),
-      txt2().text("", 0.7),
+      txt2().x(xParent(), 0.7, easeInOutCubic),
+      txt2().y(yParent(), 0.7),
     ),
 
-
-    all(
-      txt().text('load_workbook("sales_data.xlsx")', 0.3),
-      rect().ripple(),
-    )
+    rect().ripple(),
   );
 
   yield* waitFor(1);
 
   yield* all(
-    rect().rotation(360, 0.8, easeInOutCubic),
-    txt().text("Workbook()", 0.8),
-    rect().fill(orange, 0.8, easeInOutCubic),
-    rect().width(200, 0.8),
+    txt().text("Workbook", 0.5),
+    txt().x(() => xParent() - 90, 0.5),
+    // rect().rotation(360, 0.5, easeInOutCubic),
+    rect().fill(orange, 0.5),
+    rect().width(300, 0.5),
+    txt2().text("", 0.5),
   );
 
+
   yield* waitFor(1);
+
 
 
 });
