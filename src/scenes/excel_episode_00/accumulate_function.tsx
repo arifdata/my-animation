@@ -5,8 +5,7 @@ import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
 import gambar from './exce_file.png';
-import { orange } from '../../color-palettes/five-colorful';
-import { maroon, darkBlue } from '../../color-palettes/ten-colorful'; 
+import { maroon, darkBlue, orange, thickOrange, reddish } from '../../color-palettes/ten-colorful'; 
 
 export default makeScene2D(function* (view) {
   const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
@@ -16,6 +15,7 @@ export default makeScene2D(function* (view) {
   const workBookObject = createRef<Layout>();
   const customRect = createRef<Rect>();
   const dataObject = createRef<Layout>();
+  const cellReferences = [];
   const posX = createSignal(700);
   const posY = createSignal(0);
 
@@ -84,12 +84,37 @@ export default makeScene2D(function* (view) {
   view.add(
     <Object label='data' color={darkBlue} width={400} height={200} ref={dataObject} />
   );
-
   dataObject().x(100);
   dataObject().y(-800);
-  // dataObject().y(-400);
-  //
+
   yield* dataObject().y(-400, 1, easeInOutExpo);
+
+  yield* waitFor(0.5);
+
+  yield* all(
+    customRect().opacity(0.5, 1),
+    customRect().width(150, 1, easeInOutExpo),
+    customRect().height(50, 1, easeInOutExpo),
+    customRect().fill(reddish, 1),
+    customRect().opacity(0.3, 1),
+    customRect().x(-320, 1, easeInOutExpo),
+    customRect().y(250, 1 ,easeInOutExpo),
+  );
+
+  yield* waitFor(0.5);
+
+  yield* customRect().ripple();
+
+  cellReferences.push(createRef<Layout>());
+  view.add(
+    <CellContent opacity={0} ref={cellReferences[0]} itemName={"Paracetamol"} number={30} x={() => customRect().x()} y={() => customRect().y()}/>
+  );
+
+  yield* all(
+    cellReferences[0]().x(0, 1, easeInOutExpo),
+    cellReferences[0]().y(-400, 1, easeInOutExpo),
+    cellReferences[0]().opacity(1, 0.5),
+  );
 
   yield* waitFor(0.5);
 

@@ -3,10 +3,10 @@ import { ATxt } from '../utils/nodes/ATxt';
 import { black, red } from '../color-palettes/five-colorful';
 import { darkGreen } from '../color-palettes/green-excel-zero';
 
-export function CellContent({width = 100, gap = 10, color = red, ref = null, itemName = "", number = 0}) {
+export function CellContent({x = 0, y = 0, width = 100, gap = 10, color = red, ref = null, itemName = "", number = 0, opacity = 1}) {
   return (
   <>
-      <Layout direction={"column"} width={width} gap={gap} layout ref={ref} scale={0.6}>
+      <Layout x={x} y={y} direction={"column"} width={width} gap={gap} layout ref={ref} scale={0.6} opacity={opacity}>
         <ATxt text={itemName} fill={black} justifyContent={"start"} />
         <Circle width={150} height={150} fill={color} layout alignItems={"center"} justifyContent={"center"}>
           <ATxt text={`${number}`} fill={black} scale={1.6}/>
