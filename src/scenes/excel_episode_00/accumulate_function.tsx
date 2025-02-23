@@ -292,6 +292,11 @@ export default makeScene2D(function* (view) {
     ),
   );
 
+  yield* all(
+    posY(-1000, 1, easeInOutExpo),
+    customRect().opacity(0, 0.5, easeInOutExpo),
+  );
+
   yield* waitFor(2);
 
 
