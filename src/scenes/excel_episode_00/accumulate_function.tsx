@@ -5,7 +5,7 @@ import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
 import gambar from './exce_file.png';
-import { maroon, darkBlue, orange, thickOrange, reddish } from '../../color-palettes/ten-colorful'; 
+import { reddish, darkBlue, orange, thickOrange, reddish, yellow } from '../../color-palettes/ten-colorful'; 
 import { ATxt } from '../../utils/nodes/ATxt';
 import { black } from '../../color-palettes/five-colorful';
 import sheet2_png_0 from './sheet_2_0.png';
@@ -89,7 +89,7 @@ export default makeScene2D(function* (view) {
   );
 
   view.add(
-    <Object label='data' color={darkBlue} width={400} height={200} ref={dataObject} />
+    <Object label='data' color={yellow} width={400} height={200} ref={dataObject} />
   );
   dataObject().x(100);
   dataObject().y(-800);
@@ -114,7 +114,7 @@ export default makeScene2D(function* (view) {
 
   cellReferences.push(createRef<Layout>());
   view.add(
-    <CellContent color={maroon} opacity={0} ref={cellReferences[0]} itemName={"Paracetamol"} number={30} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={reddish} opacity={0} ref={cellReferences[0]} itemName={"Paracetamol"} number={30} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -130,7 +130,7 @@ export default makeScene2D(function* (view) {
   cellReferences.push(createRef<Layout>());
 
   view.add(
-    <CellContent color={maroon} opacity={0} ref={cellReferences[1]} itemName={"Ambroxol"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={reddish} opacity={0} ref={cellReferences[1]} itemName={"Ambroxol"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -167,7 +167,7 @@ export default makeScene2D(function* (view) {
   cellReferences.push(createRef<Layout>());
 
   view.add(
-    <CellContent color={maroon} opacity={0} ref={cellReferences[3]} itemName={"Metformin"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={reddish} opacity={0} ref={cellReferences[3]} itemName={"Metformin"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -209,7 +209,7 @@ export default makeScene2D(function* (view) {
   cellReferences.push(createRef<Layout>());
 
   view.add(
-    <CellContent color={maroon} opacity={0} ref={cellReferences[5]} itemName={"Ibuprofen"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={reddish} opacity={0} ref={cellReferences[5]} itemName={"Ibuprofen"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -245,7 +245,7 @@ export default makeScene2D(function* (view) {
   cellReferences.push(createRef<Layout>());
 
   view.add(
-    <CellContent color={maroon} opacity={0} ref={cellReferences[7]} itemName={"Amlodipine"} number={80} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={reddish} opacity={0} ref={cellReferences[7]} itemName={"Amlodipine"} number={80} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -425,7 +425,7 @@ export default makeScene2D(function* (view) {
   const three_circles = Array.from({length: 3}, () => createRef<Circle>());
 
   three_circles.forEach((ref) => {
-    view.add(<Circle ref={ref} fill={maroon} width={50} height={50} x={-370} y={-400} scale={0}/>);
+    view.add(<Circle ref={ref} fill={reddish} width={50} height={50} x={-370} y={-400} scale={0}/>);
   });
 
   yield* waitFor(2);
