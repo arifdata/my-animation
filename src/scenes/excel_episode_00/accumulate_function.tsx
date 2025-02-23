@@ -54,10 +54,10 @@ export default makeScene2D(function* (view) {
   );
 
   yield view.add(
-    <Rect fill={orange} width={100} height={30} ref={customRect} opacity={0.5} radius={10} x={800} y={150}/>
+    <Rect fill={orange} width={80} height={25} ref={customRect} opacity={0.5} radius={10} x={800} y={145}/>
   );
 
-  yield* customRect().x(-120, 1, easeInOutExpo);
+  yield* customRect().x(-125, 1, easeInOutExpo);
 
   yield* waitFor(0.5);
 
@@ -79,6 +79,7 @@ export default makeScene2D(function* (view) {
   yield* all(
     posX(-300, 1, easeInOutExpo),
     posY(500, 1, easeInOutExpo),
+    loopElements().gap(30, 1),
   );
 
   view.add(
@@ -98,7 +99,7 @@ export default makeScene2D(function* (view) {
     customRect().fill(reddish, 1),
     customRect().opacity(0.3, 1),
     customRect().x(-320, 1, easeInOutExpo),
-    customRect().y(250, 1 ,easeInOutExpo),
+    customRect().y(140, 1 ,easeInOutExpo),
   );
 
   yield* waitFor(0.5);
@@ -107,7 +108,7 @@ export default makeScene2D(function* (view) {
 
   cellReferences.push(createRef<Layout>());
   view.add(
-    <CellContent opacity={0} ref={cellReferences[0]} itemName={"Paracetamol"} number={30} x={() => customRect().x()} y={() => customRect().y()}/>
+    <CellContent color={maroon} opacity={0} ref={cellReferences[0]} itemName={"Paracetamol"} number={30} x={() => customRect().x()} y={() => customRect().y()}/>
   );
 
   yield* all(
@@ -116,9 +117,24 @@ export default makeScene2D(function* (view) {
     cellReferences[0]().opacity(1, 0.5),
   );
 
-  yield* waitFor(0.5);
+  yield* all(
+    posY(420, 1, easeInOutExpo),
+  );
 
+  yield* customRect().ripple();
 
+  cellReferences.push(createRef<Layout>());
+
+  view.add(
+    <CellContent color={maroon} opacity={0} ref={cellReferences[1]} itemName={"Ambroxol"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+  );
+
+  yield* all(
+    cellReferences[1]().x(150, 1, easeInOutExpo),
+    cellReferences[1]().y(-370, 1, easeInOutExpo),
+    cellReferences[1]().opacity(1, 0.5),
+  );
+  yield* waitFor(2);
 
 
 });
