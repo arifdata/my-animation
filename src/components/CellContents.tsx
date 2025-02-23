@@ -1,6 +1,7 @@
-import {Layout, Circle} from '@motion-canvas/2d';
+import {Layout, Circle, Rect} from '@motion-canvas/2d';
 import { ATxt } from '../utils/nodes/ATxt';
 import { black, red } from '../color-palettes/five-colorful';
+import { darkGreen } from '../color-palettes/green-excel-zero';
 
 export function CellContent({width = 100, gap = 10, color = red, ref = null, itemName = "", number = 0}) {
   return (
@@ -15,3 +16,13 @@ export function CellContent({width = 100, gap = 10, color = red, ref = null, ite
   );
 };
 
+export function WorkbookObject({ref = null}) {
+  return (
+    <>
+      <Layout direction={"column"} gap={10} ref={ref} layout>
+        <ATxt fill={black} text={"Workbook"} />
+        <Rect fill={darkGreen} width={250} height={100} radius={10}/>
+      </Layout>
+    </>
+  );
+};
