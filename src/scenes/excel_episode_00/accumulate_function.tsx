@@ -214,6 +214,27 @@ export default makeScene2D(function* (view) {
     cellReferences[5]().opacity(1, 0.5),
   );
 
+  yield* posY(20, 1, easeInOutExpo);
+  cellReferences.push(createRef<Txt>());
+
+  view.add(
+    <ATxt text={"30"} ref={cellReferences[6]} opacity={1} scale={0.8} x={() => customRect().x() + 120} y={() => customRect().y()} fill={black} />
+  );
+
+  yield* chain(
+    all(
+      cellReferences[6]().x(() => cellReferences[3]().x(), 1, easeInOutExpo),
+      cellReferences[6]().y(() => cellReferences[3]().y(), 1, easeInOutExpo),
+      cellReferences[6]().opacity(1, 0).to(0, 1),
+    ),
+
+    all(
+      cellReferences[3]().children()[1].children()[0].text("50", 0),
+      cellReferences[3]().children()[1].ripple(),
+    ),
+  );
+
+
   yield* waitFor(2);
 
 
