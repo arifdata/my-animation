@@ -177,6 +177,42 @@ export default makeScene2D(function* (view) {
     cellReferences[3]().opacity(1, 0.5),
   );
 
+  yield* posY(180, 1, easeInOutExpo);
+
+  cellReferences.push(createRef<Txt>());
+
+  view.add(
+    <ATxt text={"10"} ref={cellReferences[4]} opacity={0} scale={0.8} x={() => customRect().x() + 120} y={() => customRect().y()} fill={black} />
+  );
+
+  yield* chain(
+    all(
+      cellReferences[4]().x(() => cellReferences[1]().x(), 1, easeInOutExpo),
+      cellReferences[4]().y(() => cellReferences[1]().y(), 1, easeInOutExpo),
+      cellReferences[4]().opacity(1, 0).to(0, 1),
+    ),
+
+    all(
+      cellReferences[1]().children()[1].children()[0].text("30", 0),
+      cellReferences[1]().children()[1].ripple(),
+    ),
+  );
+
+  yield* posY(100, 1, easeInOutExpo);
+
+  yield* customRect().ripple();
+
+  cellReferences.push(createRef<Layout>());
+
+  view.add(
+    <CellContent color={maroon} opacity={0} ref={cellReferences[5]} itemName={"Ibuprofen"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+  );
+
+  yield* all(
+    cellReferences[5]().x(0, 1, easeInOutExpo),
+    cellReferences[5]().y(-270, 1, easeInOutExpo),
+    cellReferences[5]().opacity(1, 0.5),
+  );
 
   yield* waitFor(2);
 
