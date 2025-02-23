@@ -156,6 +156,27 @@ export default makeScene2D(function* (view) {
     ),
   );
 
+  yield* posY(260, 1, easeInOutExpo);
+
+  yield* customRect().ripple();
+
+  cellReferences.push(createRef<Layout>());
+
+  view.add(
+    <CellContent color={maroon} opacity={0} ref={cellReferences[3]} itemName={"Metformin"} number={20} x={() => customRect().x()} y={() => customRect().y()}/>
+  );
+
+  yield* all(
+    dataObject().children()[1].width(500, 1, easeInOutExpo),
+    dataObject().children()[1].height(400, 1, easeInOutExpo),
+    dataObject().x(170, 1, easeInOutExpo),
+    dataObject().y(-300, 1, easeInOutExpo),
+
+    cellReferences[3]().x(300, 1, easeInOutExpo),
+    cellReferences[3]().y(-400, 1, easeInOutExpo),
+    cellReferences[3]().opacity(1, 0.5),
+  );
+
 
   yield* waitFor(2);
 
