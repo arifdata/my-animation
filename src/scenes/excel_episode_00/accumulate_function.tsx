@@ -1,5 +1,5 @@
 // RENDER DENGAN RESOLUSI 970 X 1080
-import {makeScene2D, Layout, Img, Rect, Txt} from '@motion-canvas/2d';
+import {makeScene2D, Layout, Img, Rect, Txt, Circle, fillRect} from '@motion-canvas/2d';
 import {all, chain, createRef, easeInOutExpo, waitFor} from '@motion-canvas/core';
 import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
@@ -9,6 +9,9 @@ import { maroon, darkBlue, orange, thickOrange, reddish } from '../../color-pale
 import { ATxt } from '../../utils/nodes/ATxt';
 import { black } from '../../color-palettes/five-colorful';
 import sheet2_png_0 from './sheet_2_0.png';
+import sheet2_png_1 from './sheet_2_1.png';
+import sheet2_png_2 from './sheet_2_2.png';
+import sheet2_png_3 from './sheet_2_3.png';
 
 export default makeScene2D(function* (view) {
   const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
@@ -353,6 +356,77 @@ export default makeScene2D(function* (view) {
     image().src(sheet2_png_0, 0),
   );
 
+  view.add(
+    <ATxt fill={black} y={-200} x={300} ref={sheet2_txt} text={`counter: 1`} />
+  );
+
+  yield* all(
+    dataObject().scale(1, 1),
+    dataObject().children()[1].width(150, 1),
+    dataObject().children()[1].height(150, 1),
+    dataObject().y(-430, 1),
+    dataObject().x(-370, 1),
+  );
+
+  const explainer = createRef<Txt>();
+
+  view.add(
+    <ATxt ref={explainer} fill={black} text={''} scale={1.2} y={250}/>
+  );
+
+  yield* all(
+    cellReferences[0]().scale(0, 0).to(0.6, 0.5),
+    cellReferences[0]().x(-390, 0),
+    cellReferences[0]().y(-410, 0),
+    explainer().text(`f"A{counter}" = drug_name\nf"B{counter}" = amount`, 1),
+  );
+
+  yield* waitFor(0.5);
+
+  yield* chain(
+    all(
+      cellReferences[0]().x(0, 1, easeInOutExpo),
+      cellReferences[0]().y(0, 1, easeInOutExpo),
+      cellReferences[0]().scale(0, 0.8),
+      sheet2_txt().ripple(),
+      explainer().text(`A1 = Paracetamol\nB1 = 90`, 1),
+    ),
+
+    all(
+      image().ripple(),
+      image().src(sheet2_png_1, 0),
+      explainer().text("", 0.7),
+    ),
+  );
+
+  yield* all(
+    sheet2_txt().text(`counter : 2`, 0.5),
+    cellReferences[1]().scale(0, 0).to(0.6, 0.5),
+    cellReferences[1]().x(-390, 0),
+    cellReferences[1]().y(-410, 0),
+    explainer().text(`f"A{counter}" = drug_name\nf"B{counter}" = amount`, 1),
+  );
+
+  yield* chain(
+    all(
+      cellReferences[1]().x(0, 1, easeInOutExpo),
+      cellReferences[1]().y(0, 1, easeInOutExpo),
+      cellReferences[1]().scale(0, 0.8),
+      sheet2_txt().ripple(),
+      explainer().text(`A1 = Ambroxol\nB1 = 30`, 1),
+    ),
+    all(
+      image().ripple(),
+      image().src(sheet2_png_2, 0),
+      explainer().text("", 0.7),
+    ),
+  );
+
+  const three_circles = Array.from({length: 3}, () => createRef<Circle>());
+
+  three_circles.forEach((ref) => {
+    view.add(<Circle ref={ref} fill={maroon} width={50} height={50} x={-370} y={-400} scale={0}/>);
+  });
 
   yield* waitFor(2);
 
