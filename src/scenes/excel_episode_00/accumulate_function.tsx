@@ -8,6 +8,7 @@ import gambar from './exce_file.png';
 import { maroon, darkBlue, orange, thickOrange, reddish } from '../../color-palettes/ten-colorful'; 
 import { ATxt } from '../../utils/nodes/ATxt';
 import { black } from '../../color-palettes/five-colorful';
+import sheet2_png_0 from './sheet_2_0.png';
 
 export default makeScene2D(function* (view) {
   const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
@@ -296,6 +297,62 @@ export default makeScene2D(function* (view) {
     posY(-1000, 1, easeInOutExpo),
     customRect().opacity(0, 0.5, easeInOutExpo),
   );
+
+  yield* chain(
+    all(
+      cellReferences[7]().scale(0, 0.5, easeInOutExpo),
+      cellReferences[5]().scale(0, 0.5, easeInOutExpo),
+      cellReferences[3]().scale(0, 0.5, easeInOutExpo),
+      cellReferences[1]().scale(0, 0.5, easeInOutExpo),
+      cellReferences[0]().scale(0, 0.5, easeInOutExpo),
+    ),
+
+    all(
+      dataObject().children()[1].width(150, 0.5),
+      dataObject().children()[1].height(80, 0.5),
+
+      dataObject().scale(0.7, 1, easeInOutExpo),
+
+    ),
+
+    all(
+      dataObject().x(-400, 0.5, easeInOutExpo),
+      dataObject().y(-470, 0.5, easeInOutExpo),
+    ),
+  );
+
+  yield* all(
+    workBookObject().opacity(1, 0.5),
+    workBookObject().x(0, 0.5),
+    workBookObject().y(0, 0.5),
+  );
+
+  yield* workBookObject().children()[0].text("Workbook.create_sheet()", 0.5);
+  
+  const sheet2_txt = createRef<Txt>();
+  view.add(
+    <ATxt fill={black} y={0} x={700} ref={sheet2_txt} text={'"Sheet2"'} />
+  );
+
+  yield* all(
+    sheet2_txt().x(-65, 0.5, easeInOutExpo),
+    sheet2_txt().y(17, 0.5, easeInOutExpo),
+  );
+
+  yield* all(
+    workBookObject().children()[1].add(sheet2_txt()),
+    workBookObject().scale(0, 1),
+    image().x(0, 0),
+    image().y(0, 0),
+    image().opacity(1, 1),
+    image().scale(0, 0).to(1, 1),
+  );
+
+  yield* all(
+    image().ripple(),
+    image().src(sheet2_png_0, 0),
+  );
+
 
   yield* waitFor(2);
 
