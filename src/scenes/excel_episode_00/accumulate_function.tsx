@@ -1,11 +1,13 @@
 // RENDER DENGAN RESOLUSI 970 X 1080
-import {makeScene2D, Layout, Img, Rect} from '@motion-canvas/2d';
-import {all, createRef, easeInOutExpo, waitFor} from '@motion-canvas/core';
+import {makeScene2D, Layout, Img, Rect, Txt} from '@motion-canvas/2d';
+import {all, chain, createRef, easeInOutExpo, waitFor} from '@motion-canvas/core';
 import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
 import gambar from './exce_file.png';
 import { maroon, darkBlue, orange, thickOrange, reddish } from '../../color-palettes/ten-colorful'; 
+import { ATxt } from '../../utils/nodes/ATxt';
+import { black } from '../../color-palettes/five-colorful';
 
 export default makeScene2D(function* (view) {
   const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
@@ -117,9 +119,7 @@ export default makeScene2D(function* (view) {
     cellReferences[0]().opacity(1, 0.5),
   );
 
-  yield* all(
-    posY(420, 1, easeInOutExpo),
-  );
+  yield* posY(420, 1, easeInOutExpo);
 
   yield* customRect().ripple();
 
@@ -134,6 +134,29 @@ export default makeScene2D(function* (view) {
     cellReferences[1]().y(-370, 1, easeInOutExpo),
     cellReferences[1]().opacity(1, 0.5),
   );
+
+  yield* posY(340, 1, easeInOutExpo);
+
+  cellReferences.push(createRef<Txt>());
+
+  view.add(
+    <ATxt text={"30"} ref={cellReferences[2]} opacity={0} scale={0.8} x={() => customRect().x() + 120} y={() => customRect().y()} fill={black} />
+  );
+
+  yield* chain(
+    all(
+      cellReferences[2]().x(() => cellReferences[0]().x(), 1, easeInOutExpo),
+      cellReferences[2]().y(() => cellReferences[0]().y(), 1, easeInOutExpo),
+      cellReferences[2]().opacity(1, 0).to(0, 1),
+    ),
+
+    all(
+      cellReferences[0]().children()[1].children()[0].text("60", 0),
+      cellReferences[0]().children()[1].ripple(),
+    ),
+  );
+
+
   yield* waitFor(2);
 
 
