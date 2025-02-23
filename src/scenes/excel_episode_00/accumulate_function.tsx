@@ -6,6 +6,7 @@ import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
 import gambar from './exce_file.png';
 import { orange } from '../../color-palettes/five-colorful';
+import { maroon, darkBlue } from '../../color-palettes/ten-colorful'; 
 
 export default makeScene2D(function* (view) {
   const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
@@ -14,6 +15,7 @@ export default makeScene2D(function* (view) {
   const loopElements = createRef<Layout>();
   const workBookObject = createRef<Layout>();
   const customRect = createRef<Rect>();
+  const dataObject = createRef<Layout>();
   const posX = createSignal(700);
   const posY = createSignal(0);
 
@@ -71,6 +73,23 @@ export default makeScene2D(function* (view) {
     loopElements().rotation(360, 1, easeInOutExpo),
     loopElements().scale(1, 1),
   );
+
+  yield* waitFor(0.5);
+
+  yield* all(
+    posX(-300, 1, easeInOutExpo),
+    posY(500, 1, easeInOutExpo),
+  );
+
+  view.add(
+    <Object label='data' color={darkBlue} width={400} height={200} ref={dataObject} />
+  );
+
+  dataObject().x(100);
+  dataObject().y(-800);
+  // dataObject().y(-400);
+  //
+  yield* dataObject().y(-400, 1, easeInOutExpo);
 
   yield* waitFor(0.5);
 
