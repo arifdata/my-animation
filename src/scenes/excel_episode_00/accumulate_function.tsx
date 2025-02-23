@@ -8,7 +8,7 @@ import gambar from './exce_file.png';
 import { orange } from '../../color-palettes/five-colorful';
 
 export default makeScene2D(function* (view) {
-  const loopItems = [{"Paracetamol tablet 500 mg": 30}, {"Ambroxol tablet 30 mg": 20}, {"Paracetamol tablet 500 mg": 30}, {"Metformin tablet 500 mg": 20}, {"Ambroxol tablet 30 mg": 10}, {"Ibuprofen tablet 400 mg": 20}, {"Metformin tablet 500 mg": 30}, {"Amlodipine tablet 5 mg": 80}, {"Ibuprofen tablet 400 mg": 30}, {"Paracetamol tablet 500 mg": 30}];
+  const loopItems = [{"Paracetamol": 30}, {"Ambroxol": 20}, {"Paracetamol": 30}, {"Metformin": 20}, {"Ambroxol": 10}, {"Ibuprofen": 20}, {"Metformin": 30}, {"Amlodipine": 80}, {"Ibuprofen": 30}, {"Paracetamol": 30}];
 
   const image = createRef<Img>();
   const loopElements = createRef<Layout>();

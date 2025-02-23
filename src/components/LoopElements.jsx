@@ -9,9 +9,9 @@ export function LoopElements({gap = 5, ref = null, elements = [{"Item 1": 10}, {
     <>
       <Layout direction={"column"} gap={gap} layout ref={ref} scale={0.8}>
         {elements.map((item) => (
-          <Rect radius={5} direction={"row"} fill={darkGreen} width={500} height={50} alignItems={"start"} justifyContent={"start"} alignContent={"start"} layout>
-            <ATxt fill={black} scale={0.6} text={`${Object.keys(item)}:`} />
-            <ATxt fill={black} scale={0.7} text={`${Object.values(item)}`} />
+          <Rect radius={5} direction={"row"} fill={darkGreen} width={250} height={50} alignItems={"start"} justifyContent={"space-evenly"} alignContent={"start"} layout>
+            <ATxt fill={black} scale={0.7} text={`${Object.keys(item)}:`} />
+            <ATxt fill={black} scale={0.8} text={`${Object.values(item)}`} />
           </Rect>
         ))}
       </Layout>
