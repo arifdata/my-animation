@@ -250,6 +250,48 @@ export default makeScene2D(function* (view) {
     cellReferences[7]().opacity(1, 0.5),
   );
 
+  yield* posY(-140, 1, easeInOutExpo);
+
+  cellReferences.push(createRef<Txt>());
+
+  view.add(
+    <ATxt text={"30"} ref={cellReferences[8]} opacity={1} scale={0.8} x={() => customRect().x() + 120} y={() => customRect().y()} fill={black} />
+  );
+
+  yield* chain(
+    all(
+      cellReferences[8]().x(() => cellReferences[5]().x(), 1, easeInOutExpo),
+      cellReferences[8]().y(() => cellReferences[5]().y(), 1, easeInOutExpo),
+      cellReferences[8]().opacity(1, 0).to(0, 1),
+    ),
+
+    all(
+      cellReferences[5]().children()[1].children()[0].text("50", 0),
+      cellReferences[5]().children()[1].ripple(),
+    ),
+  );
+
+  yield* posY(-220, 1, easeInOutExpo);
+
+  cellReferences.push(createRef<Txt>());
+
+  view.add(
+    <ATxt text={"30"} ref={cellReferences[9]} opacity={1} scale={0.8} x={() => customRect().x() + 120} y={() => customRect().y()} fill={black} />
+  );
+
+  yield* chain(
+    all(
+      cellReferences[9]().x(() => cellReferences[0]().x(), 1, easeInOutExpo),
+      cellReferences[9]().y(() => cellReferences[0]().y(), 1, easeInOutExpo),
+      cellReferences[9]().opacity(1, 0).to(0, 1),
+    ),
+
+    all(
+      cellReferences[0]().children()[1].children()[0].text("90", 0),
+      cellReferences[0]().children()[1].ripple(),
+    ),
+  );
+
   yield* waitFor(2);
 
 
