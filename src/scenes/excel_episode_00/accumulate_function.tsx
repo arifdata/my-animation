@@ -209,8 +209,8 @@ export default makeScene2D(function* (view) {
   );
 
   yield* all(
-    cellReferences[5]().x(0, 1, easeInOutExpo),
-    cellReferences[5]().y(-270, 1, easeInOutExpo),
+    cellReferences[5]().x(50, 1, easeInOutExpo),
+    cellReferences[5]().y(-250, 1, easeInOutExpo),
     cellReferences[5]().opacity(1, 0.5),
   );
 
@@ -234,6 +234,21 @@ export default makeScene2D(function* (view) {
     ),
   );
 
+  yield* posY(-60, 1, easeInOutExpo);
+
+  yield* customRect().ripple();
+
+  cellReferences.push(createRef<Layout>());
+
+  view.add(
+    <CellContent color={maroon} opacity={0} ref={cellReferences[7]} itemName={"Amlodipine"} number={80} x={() => customRect().x()} y={() => customRect().y()}/>
+  );
+
+  yield* all(
+    cellReferences[7]().x(250, 1, easeInOutExpo),
+    cellReferences[7]().y(-200, 1, easeInOutExpo),
+    cellReferences[7]().opacity(1, 0.5),
+  );
 
   yield* waitFor(2);
 
