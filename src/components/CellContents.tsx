@@ -16,12 +16,12 @@ export function CellContent({width = 100, gap = 10, color = red, ref = null, ite
   );
 };
 
-export function WorkbookObject({ref = null}) {
+export function Object({ref = null, label = "Label", color = darkGreen, width = 250, height = 100}) {
   return (
     <>
       <Layout direction={"column"} gap={10} ref={ref} layout>
-        <ATxt fill={black} text={"Workbook"} />
-        <Rect fill={darkGreen} width={250} height={100} radius={10}/>
+        <ATxt fill={black} text={label} />
+        <Rect fill={color} width={width} height={height} radius={10}/>
       </Layout>
     </>
   );

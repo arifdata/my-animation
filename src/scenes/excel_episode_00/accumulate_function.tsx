@@ -1,7 +1,7 @@
 // RENDER DENGAN RESOLUSI 970 X 1080
 import {makeScene2D, Layout, Img, Rect} from '@motion-canvas/2d';
 import {all, createRef, easeInOutExpo, waitFor} from '@motion-canvas/core';
-import { CellContent, WorkbookObject } from '../../components/CellContents';
+import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
 import gambar from './exce_file.png';
@@ -21,7 +21,7 @@ export default makeScene2D(function* (view) {
   view.fill('#ffffff');
 
   view.add(
-    <WorkbookObject ref={workBookObject}/>
+    <Object ref={workBookObject} label='Workbook'/>
   );
   workBookObject().x(() => posX());
   workBookObject().y(() => posY());
