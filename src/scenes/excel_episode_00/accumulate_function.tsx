@@ -1,6 +1,6 @@
 // RENDER DENGAN RESOLUSI 970 X 1080
 import {makeScene2D, Layout, Img, Rect, Txt, Circle, fillRect} from '@motion-canvas/2d';
-import {all, chain, createRef, easeInOutExpo, waitFor} from '@motion-canvas/core';
+import {all, chain, createRef, delay, easeInOutExpo, sequence, useLogger, waitFor} from '@motion-canvas/core';
 import { CellContent, Object } from '../../components/CellContents';
 import { LoopElements } from '../../components/LoopElements';
 import { createSignal } from '@motion-canvas/core';
@@ -425,10 +425,49 @@ export default makeScene2D(function* (view) {
   const three_circles = Array.from({length: 3}, () => createRef<Circle>());
 
   three_circles.forEach((ref) => {
-    view.add(<Circle ref={ref} fill={reddish} width={50} height={50} x={-370} y={-400} scale={0}/>);
+    view.add(<Circle ref={ref} fill={reddish} width={50} height={50} x={-370} y={-400} />);
   });
 
-  yield* waitFor(2);
+  const counter = createSignal(2);
 
+  yield sheet2_txt().text(() => `counter: ${counter()}`, 0.3);
+
+  yield* sequence(0.3,
+    ...three_circles.map(ref => all(
+      ref().scale(0, 0).to(1, 0.3),
+      ref().x(-100, 0.3, easeInOutExpo),
+      ref().y(-100, 0.3, easeInOutExpo),
+      image().ripple(0.3),
+      counter(() => counter() + 1, 0),
+      delay(0.3, ref().scale(0, 0.3)),
+    ))
+  );
+
+  yield* all(
+    image().ripple(0.5),
+    image().src(sheet2_png_3, 0)
+  );
+
+  workBookObject().children()[1].children()[0].scale(0);
+
+  yield* all(
+    dataObject().x(-800, 0.5, easeInOutExpo),
+    sheet2_txt().x(800, 0.5, easeInOutExpo),
+    image().size(0, 0.5, easeInOutExpo),
+    workBookObject().scale(1, 0.5, easeInOutExpo),
+  );
+
+  yield* waitFor(0.5);
+
+  yield* chain(
+    workBookObject().children()[0].text("Workbook.save()", 0.5, easeInOutExpo),
+    workBookObject().children()[1].ripple(),
+    all(
+      workBookObject().scale(0, 0.5),
+      workBookObject().x(800, 0.5, easeInOutExpo),
+    ),
+  );
+
+  yield* waitFor(1);
 
 });
