@@ -389,7 +389,7 @@ export default makeScene2D(function* (view) {
       cellReferences[0]().y(0, 0.5, easeInOutExpo),
       cellReferences[0]().scale(0, 0.3),
       sheet2_txt().ripple(0.5),
-      explainer().text(`A1 = Paracetamol\nB1 = 90`, 1),
+      explainer().text(`cell A1 = Paracetamol\ncell B1 = 90`, 1),
     ),
 
     all(
@@ -413,7 +413,7 @@ export default makeScene2D(function* (view) {
       cellReferences[1]().y(0, 0.5, easeInOutExpo),
       cellReferences[1]().scale(0, 0.3),
       sheet2_txt().ripple(0.5),
-      explainer().text(`A1 = Ambroxol\nB1 = 30`, 0.5),
+      explainer().text(`cell A1 = Ambroxol\ncell B1 = 30`, 0.5),
     ),
     all(
       image().ripple(0.5),
