@@ -343,7 +343,9 @@ export default makeScene2D(function* (view) {
   );
 
   yield* all(
-    workBookObject().children()[1].add(sheet2_txt()),
+    // workBookObject().children()[1].add(sheet2_txt()),
+    sheet2_txt().scale(0, 0.5),
+
     workBookObject().scale(0, 0.5),
     image().x(0, 0),
     image().y(0, 0),
@@ -387,7 +389,7 @@ export default makeScene2D(function* (view) {
     all(
       cellReferences[0]().x(0, 0.5, easeInOutExpo),
       cellReferences[0]().y(0, 0.5, easeInOutExpo),
-      cellReferences[0]().scale(0, 0.3),
+      cellReferences[0]().scale(0, 0.5),
       sheet2_txt().ripple(0.5),
       explainer().text(`cell A1 = Paracetamol\ncell B1 = 90`, 1),
     ),
@@ -411,7 +413,7 @@ export default makeScene2D(function* (view) {
     all(
       cellReferences[1]().x(0, 0.5, easeInOutExpo),
       cellReferences[1]().y(0, 0.5, easeInOutExpo),
-      cellReferences[1]().scale(0, 0.3),
+      cellReferences[1]().scale(0, 0.5),
       sheet2_txt().ripple(0.5),
       explainer().text(`cell A1 = Ambroxol\ncell B1 = 30`, 0.5),
     ),
@@ -435,8 +437,8 @@ export default makeScene2D(function* (view) {
   yield* sequence(0.3,
     ...three_circles.map(ref => all(
       ref().scale(0, 0).to(1, 0.3),
-      ref().x(-100, 0.3, easeInOutExpo),
-      ref().y(-100, 0.3, easeInOutExpo),
+      ref().x(0, 0.3, easeInOutExpo),
+      ref().y(0, 0.3, easeInOutExpo),
       image().ripple(0.3),
       counter(() => counter() + 1, 0),
       delay(0.3, ref().scale(0, 0.3)),
@@ -448,7 +450,7 @@ export default makeScene2D(function* (view) {
     image().src(sheet2_png_3, 0)
   );
 
-  workBookObject().children()[1].children()[0].scale(0);
+  // workBookObject().children()[1].children()[0].scale(0);
 
   yield* all(
     dataObject().x(-800, 0.5, easeInOutExpo),
