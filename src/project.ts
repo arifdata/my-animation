@@ -18,10 +18,20 @@ import taskSearch from './scenes/slamaDev/taskSearch-9?scene';
 import groupingObjects from './scenes/slamaDev/groupingObjects-10?scene';
 import groupingObjects2 from './scenes/slamaDev/groupingObjects-10-2?scene';
 import gridChromaJS from './scenes/slamaDev/gridChromaJS-11?scene';
+import addRemoveOrdering from './scenes/slamaDev/addRemoveOrdering-12?scene';
+import animationFlow from './scenes/slamaDev/animationFlow-13?scene';
+import signals1 from './scenes/slamaDev/signals-14?scene';
+import signals2 from './scenes/slamaDev/signals-14-2?scene';
+import effects from './scenes/slamaDev/effects-15?scene';
+import moveAlongSpline from './scenes/slamaDev/moveAlongSpline-16?scene';
+import taskShuffle from './scenes/slamaDev/taskShuffle-17?scene';
+import triangle from './scenes/slamaDev/triangle-18?scene';
+import wave from './scenes/slamaDev/wave-19?scene';
+import hilbert from './scenes/slamaDev/hilbert-20?scene';
 
 export default makeProject({
   // scenes: [example, inputProcessOutput],
   // scenes: [inputProcessOutput],
   // scenes: [/*workBookObject*/ accumulate_function],
-  scenes: [gridChromaJS, groupingObjects2, groupingObjects, taskSearch, taskSort,/*typesettingTextAndMath,*/ saveAndRestore, flexbox, alignTo, moveTo, aligningObjects, noAnimateSyntax2, noAnimateSyntax, firstAnimation]
+  scenes: [hilbert, wave, triangle, taskShuffle, moveAlongSpline, effects, signals2, signals1, animationFlow, addRemoveOrdering, gridChromaJS, groupingObjects2, groupingObjects, taskSearch, taskSort,/*typesettingTextAndMath,*/ saveAndRestore, flexbox, alignTo, moveTo, aligningObjects, noAnimateSyntax2, noAnimateSyntax, firstAnimation]
 });
