@@ -15,10 +15,13 @@ import saveAndRestore from './scenes/slamaDev/saveAndRestore-6?scene';
 // import typesettingTextAndMath from './scenes/slamaDev/typesettingTextAndMath-7?scene';
 import taskSort from './scenes/slamaDev/taskSort-8?scene';
 import taskSearch from './scenes/slamaDev/taskSearch-9?scene';
+import groupingObjects from './scenes/slamaDev/groupingObjects-10?scene';
+import groupingObjects2 from './scenes/slamaDev/groupingObjects-10-2?scene';
+import gridChromaJS from './scenes/slamaDev/gridChromaJS-11?scene';
 
 export default makeProject({
   // scenes: [example, inputProcessOutput],
   // scenes: [inputProcessOutput],
   // scenes: [/*workBookObject*/ accumulate_function],
-  scenes: [taskSearch, taskSort,/*typesettingTextAndMath,*/ saveAndRestore, flexbox, alignTo, moveTo, aligningObjects, noAnimateSyntax2, noAnimateSyntax, firstAnimation]
+  scenes: [gridChromaJS, groupingObjects2, groupingObjects, taskSearch, taskSort,/*typesettingTextAndMath,*/ saveAndRestore, flexbox, alignTo, moveTo, aligningObjects, noAnimateSyntax2, noAnimateSyntax, firstAnimation]
 });
