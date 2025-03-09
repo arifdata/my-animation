@@ -95,6 +95,38 @@ export default makeScene2D(function* (view) {
     // output[0]().y(-500, 0.5, easeInOutCubic),
   );
 
+  yield* waitFor(0.5);
+
+  output.push(createRef<Icon>());
+  view.add(
+    <Icon ref={output[1]} icon={"emojione:cheese-wedge"} x={0} y={-500} scale={10} zIndex={0}/>
+  );
+  yield* sequence(0.5,
+    output[0]().x(0, 0.5, easeInOutCubic),
+    process[1]().ripple(),
+    output[1]().x(400, 0.5, easeInOutCubic),
+    disappear(output[0]()),
+  );
+
+  const spline2 = createRef<Spline>();
+  progress1(0);
+  view.add(
+    <Spline
+      ref={spline2}
+      // lineWidth={5}
+      // stroke={black}
+      points={[[400, -500], [0, -300], [-300, -50], [0, 0]]}
+      smoothness={2}
+    />
+  );
+
+  yield* output[1]().position(() => spline2().getPointAtPercentage(progress1()).position);
+
+  yield* sequence(0.5,
+    progress1(1, 1, easeInOutCubic),
+    process[0]().ripple(),
+  );
+
 
   yield* waitFor(1);
 });
