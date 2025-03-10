@@ -115,16 +115,71 @@ export default makeScene2D(function* (view) {
       ref={spline2}
       // lineWidth={5}
       // stroke={black}
-      points={[[400, -500], [0, -300], [-300, -50], [0, 0]]}
-      smoothness={2}
+      points={[[400, -500], [0, -250], [-500, -50], [0, 0]]}
+      // smoothness={2}
     />
   );
 
   yield* output[1]().position(() => spline2().getPointAtPercentage(progress1()).position);
 
+  output.push(createRef<Icon>());
+  view.add(
+    <Icon ref={output[2]} icon={"emojione:pizza"} x={0} y={0} scale={10} zIndex={0}/>
+  );
+  input.push(createRef<Icon>());
+  view.add(
+    <Icon ref={input[1]} icon={"emojione:tomato"} x={-800} y={0} scale={10} zIndex={0}/>
+  );
+  input.push(createRef<Icon>());
+  view.add(
+    <Icon ref={input[2]} icon={"twemoji:flatbread"} x={-800} y={0} scale={10} zIndex={0}/>
+  );
+
   yield* sequence(0.5,
-    progress1(1, 1, easeInOutCubic),
+    progress1(1, 0.5, easeInOutCubic),
+    input[1]().x(0, 0.5, easeInOutCubic),
+    input[2]().x(0, 0.5, easeInOutCubic),
     process[0]().ripple(),
+    output[2]().x(400, 0.5, easeInOutCubic),
+  );
+
+
+  const spline3 = createRef<Spline>();
+  const progress2 = createSignal(0);
+  view.add(
+    <Spline
+      ref={spline3}
+      lineWidth={5}
+      // stroke={black}
+      points={[[400, 0], [0, 250], [-500, 500], [0, 500]]}
+      // smoothness={2}
+    />
+  );
+
+  yield* output[2]().position(() => spline3().getPointAtPercentage(progress2()).position);
+  output.push(createRef<Icon>());
+  view.add(
+    <Icon ref={output[3]} icon={"noto-v1:pile-of-poo"} x={0} y={500} scale={10} zIndex={0}/>
+  );
+  yield* sequence(0.5,
+    progress2(1, 1, easeInOutCubic),
+    process[2]().ripple(),
+    all(
+      output[3]().x(800, 1.5, easeInOutCubic),
+      output[3]().rotation(360, 1.5),
+    ),
+
+    all(
+      disappear(process[0]()),
+      disappear(process[1]()),
+      disappear(process[2]()),
+      disappear(input[2]()),
+      disappear(input[1]()),
+      disappear(input[0]()),
+      disappear(output[1]()),
+      disappear(output[2]()),
+    ),
+    // output[3]().x(800, 1, easeInOutCubic),
   );
 
 
