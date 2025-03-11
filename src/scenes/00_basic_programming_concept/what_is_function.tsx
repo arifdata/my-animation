@@ -1,5 +1,5 @@
 import {makeScene2D, Code, Layout, word} from '@motion-canvas/2d';
-import {all, createRef, DEFAULT, easeInOutCubic, waitFor} from '@motion-canvas/core';
+import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor} from '@motion-canvas/core';
 import { white, black, blue, red, orange } from '../../color-palettes/five-colorful';
 import { Object } from '../../components/CellContents';
 import { appear } from '../slamaDev/utilities';
@@ -31,37 +31,40 @@ export default makeScene2D(function* (view) {
 
   view.add(
     <Code
-      // fill={black}
       ref={code}
-      fontSize={32}
+      fontSize={42}
       fontFamily={'JetBrains Mono, monospace'}
       offsetX={-1}
-      x={-400}
+      x={-500}
       code={''}
     />,
   );
 
   yield* appear(code());
 
-  // yield* waitFor(0.6);
   yield* all(
-    // code().code.replace(code().findFirstRange('number'), 'variable', 0.6),
-    // code().code.prepend(0.6)`function example() {\n  `,
     code().code.append(0.6)`def function_name():\n    pass`,
   );
 
   yield* waitFor(0.6);
   yield* code().selection(code().findFirstRange('def'), 0.6);
   // yield* code().selection(code().findFirstRange('function_name()'), 0.6);
-  yield* code().selection(word(0, 4, 16), 0.6);
+  yield* code().selection(word(0, 4, 15), 0.6);
+  yield* code().selection(word(0, 19, 1), 0.6);
   yield* code().selection(code().findFirstRange('pass'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
 
   yield* waitFor(0.6);
-  yield* all(
-    code().code('def say_hello():\n    pass', 0.6),
-    code().selection(DEFAULT, 0.6),
-  );
+
+  yield* code().code('def greet():\n    pass', 1);
+  yield* code().code('def greet():\n    print("Hello world!)', 1);
+  yield* code().code('def greet() -> None:\n    print("Hello world!)', 1);
+
+  // yield* all(
+  //   code().code(`def greet() -> None:\n    print("Hello! My name is {name}. I'am {age} years old.`, 1),
+  //   code().fontSize(28, 1),
+  // );
+    // code().code('def greet():\n    print("Hello world!)', 1),
 
 
   yield* waitFor(1);
