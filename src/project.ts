@@ -2,7 +2,7 @@ import {makeProject} from '@motion-canvas/core';
 
 // import example from './scenes/example?scene';
 // import inputProcessOutput from './scenes/00_basic_programming_concept/input_process_output?scene';
-import whatIsProgramming from './scenes/00_basic_programming_concept/what_is_programming?scene';
+// import whatIsProgramming from './scenes/00_basic_programming_concept/what_is_programming?scene';
 // import workBookObject from './scenes/excel_episode_00/workbook_object?scene';
 // import accumulate_function from './scenes/excel_episode_00/accumulate_function?scene';
 // import firstAnimation from './scenes/slamaDev/firstAnimation-0?scene';
@@ -29,10 +29,12 @@ import whatIsProgramming from './scenes/00_basic_programming_concept/what_is_pro
 // import triangle from './scenes/slamaDev/triangle-18?scene';
 // import wave from './scenes/slamaDev/wave-19?scene';
 // import hilbert from './scenes/slamaDev/hilbert-20?scene';
+//
+import what_is_function from './scenes/00_basic_programming_concept/what_is_function?scene';
 
 export default makeProject({
-  scenes: [whatIsProgramming],
-  // scenes: [inputProcessOutput],
+  // scenes: [example],
+  scenes: [what_is_function],
   // scenes: [/*workBookObject*/ accumulate_function],
   // scenes: [hilbert, wave, triangle, taskShuffle, moveAlongSpline, effects, signals2, signals1, animationFlow, addRemoveOrdering, gridChromaJS, groupingObjects2, groupingObjects, taskSearch, taskSort,/*typesettingTextAndMath,*/ saveAndRestore, flexbox, alignTo, moveTo, aligningObjects, noAnimateSyntax2, noAnimateSyntax, firstAnimation]
 });

@@ -3,6 +3,7 @@ import { makeScene2D, Circle, Rect, Camera, Icon, Txt, Spline } from "@motion-ca
 import { ATxt } from "../../utils/nodes/ATxt";
 import { appear, disappear } from "../slamaDev/utilities";
 import {white, black, blue, red, orange} from "../../color-palettes/five-colorful";
+import { darkBlue } from "../../color-palettes/ten-colorful";
 
 export default makeScene2D(function* (view) {
   view.fill(white);
@@ -86,6 +87,7 @@ export default makeScene2D(function* (view) {
 
   yield* sequence(0.5,
     all(
+    process[0]().fill(darkBlue, 0.5),
 
     process[1]().y(-500, 0.5, easeInOutCubic),
     process[2]().y(500, 0.5, easeInOutCubic),
