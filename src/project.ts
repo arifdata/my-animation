@@ -1,4 +1,8 @@
 import {makeProject} from '@motion-canvas/core';
+import { LezerHighlighter, Code } from '@motion-canvas/2d';
+import { parser } from '@lezer/python';
+
+Code.defaultHighlighter = new LezerHighlighter(parser);
 
 // import example from './scenes/example?scene';
 // import inputProcessOutput from './scenes/00_basic_programming_concept/input_process_output?scene';

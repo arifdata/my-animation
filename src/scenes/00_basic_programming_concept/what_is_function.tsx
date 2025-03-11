@@ -1,4 +1,4 @@
-import {makeScene2D, Code, Layout} from '@motion-canvas/2d';
+import {makeScene2D, Code, Layout, word} from '@motion-canvas/2d';
 import {all, createRef, DEFAULT, easeInOutCubic, waitFor} from '@motion-canvas/core';
 import { white, black, blue, red, orange } from '../../color-palettes/five-colorful';
 import { Object } from '../../components/CellContents';
@@ -52,14 +52,17 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.6);
   yield* code().selection(code().findFirstRange('def'), 0.6);
-  yield* code().selection(code().findFirstRange('function_name'), 0.6);
+  // yield* code().selection(code().findFirstRange('function_name()'), 0.6);
+  yield* code().selection(word(0, 4, 16), 0.6);
+  yield* code().selection(code().findFirstRange('pass'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
 
   yield* waitFor(0.6);
-  // yield* all(
-    // code().code('const number = 7;', 0.6),
-    // code().selection(DEFAULT, 0.6),
-  // );
+  yield* all(
+    code().code('def say_hello():\n    pass', 0.6),
+    code().selection(DEFAULT, 0.6),
+  );
 
 
+  yield* waitFor(1);
 });
