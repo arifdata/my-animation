@@ -31,18 +31,17 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function CodeLinesVisual({gap = 20, ref = null, elements = 5}) {
+export function CodeLinesVisual({gap = 40, ref = null, numberOfLines = 5}) {
+  let lines = [];
+  for (let i = 0; i < numberOfLines; i++) {
+    lines.push(
+      <Rect fill={() => chooseRandomColor(LINE_COLORS)} width={() => randomIntFromInterval(300, 800)} height={50} radius={numberOfLines} />
+    );
+  }
   return (
     <>
       <Layout direction={"column"} gap={gap} layout ref={ref} scale={0.8}>
-        {/* {elements.map((item) => ( */}
-        {/*   <Rect radius={5} direction={"row"} fill={darkGreen} width={250} height={50} alignItems={"start"} justifyContent={"space-evenly"} alignContent={"start"} layout> */}
-        {/*     <ATxt fill={black} scale={0.7} text={`${Object.keys(item)}:`} /> */}
-        {/*     <ATxt fill={black} scale={0.8} text={`${Object.values(item)}`} /> */}
-        {/*   </Rect> */}
-        {/* ))} */}
-        <Rect fill={() => chooseRandomColor(LINE_COLORS)} width={() => randomIntFromInterval(400, 700)} height={50} radius={elements} />
-        <Rect fill={() => chooseRandomColor(LINE_COLORS)} width={() => randomIntFromInterval(400, 700)} height={50} radius={elements} />
+        {lines}
       </Layout>
     </>
   );

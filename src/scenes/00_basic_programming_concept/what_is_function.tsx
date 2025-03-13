@@ -8,12 +8,6 @@ import { CodeLinesVisual } from '../../components/LoopElements';
 export default makeScene2D(function* (view) {
   view.fill(white);
   const fx = createRef<Layout>();
-  const lines = createRef<Layout>();
-
-  view.add(
-    <CodeLinesVisual ref={lines} />
-  );
-
   
   view.add(
     <Object
@@ -35,6 +29,13 @@ export default makeScene2D(function* (view) {
   );
 
   yield* waitFor(1);
+  const lines = createRef<Layout>();
+  view.add(
+    <CodeLinesVisual ref={lines} numberOfLines={8} gap={60}/>
+  );
+
+  yield* appear(lines());
+
   const code = createRef<Code>();
 
   view.add(
