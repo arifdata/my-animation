@@ -1,6 +1,6 @@
-import {makeScene2D, Code, Layout, word} from '@motion-canvas/2d';
+import {makeScene2D, Code, Layout, word, Icon} from '@motion-canvas/2d';
 import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor} from '@motion-canvas/core';
-import { white, black, blue, red, orange } from '../../color-palettes/five-colorful';
+import { white, black} from '../../color-palettes/five-colorful';
 import { Object } from '../../components/CellContents';
 import { appear, disappear } from '../slamaDev/utilities';
 import { CodeLinesVisual } from '../../components/LoopElements';
@@ -33,8 +33,29 @@ export default makeScene2D(function* (view) {
   view.add(
     <CodeLinesVisual ref={lines} numberOfLines={8} gap={60}/>
   );
+  lines().y(300);
+  
+  const arrow = createRef<Icon>();
+  view.add(
+    <Icon ref={arrow} icon={"material-symbols:line-end-arrow-notch"} scale={8} x={-400} y={-1000} zIndex={0}/>
+  );
 
-  yield* appear(lines());
+  
+  yield* sequence(0.5,
+    appear(lines()),
+    arrow().y(-10, 0.5, easeInOutCubic),
+  );
+
+  yield* lines().children()[0].ripple();
+
+  yield* lines().y(-300, 0.7, easeInOutCubic);
+
+  yield* lines().children()[lines().children().length - 1].ripple();
+
+  yield* all(
+    disappear(lines()),
+    disappear(arrow()),
+  );
 
   const code = createRef<Code>();
 

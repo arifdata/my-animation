@@ -1,5 +1,5 @@
-import { createRef, all, easeInQuad, easeInOutBounce, linear, easeInOutCubic, easeOutBounce, easeOutCirc, easeOutElastic, easeInBounce, waitFor, sequence, createSignal } from "@motion-canvas/core";
-import { makeScene2D, Circle, Rect, Camera, Icon, Txt, Spline } from "@motion-canvas/2d";
+import { createRef, all, easeInOutCubic, waitFor, sequence, createSignal } from "@motion-canvas/core";
+import { makeScene2D, Rect, Icon, Txt, Spline } from "@motion-canvas/2d";
 import { ATxt } from "../../utils/nodes/ATxt";
 import { appear, disappear } from "../slamaDev/utilities";
 import {white, black, blue, red, orange} from "../../color-palettes/five-colorful";
