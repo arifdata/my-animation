@@ -3,10 +3,18 @@ import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor} from '@motio
 import { white, black, blue, red, orange } from '../../color-palettes/five-colorful';
 import { Object } from '../../components/CellContents';
 import { appear, disappear } from '../slamaDev/utilities';
+import { CodeLinesVisual } from '../../components/LoopElements';
 
 export default makeScene2D(function* (view) {
   view.fill(white);
   const fx = createRef<Layout>();
+  const lines = createRef<Layout>();
+
+  view.add(
+    <CodeLinesVisual ref={lines} />
+  );
+
+  
   view.add(
     <Object
       ref={fx}
