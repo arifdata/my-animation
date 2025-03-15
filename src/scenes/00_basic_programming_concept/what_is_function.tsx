@@ -163,7 +163,7 @@ export default makeScene2D(function* (view) {
         ref={label1}
       />
       <ATxt
-        text={() => `Area = ${area().toFixed(2)}`}
+        text={() => `circle_area = ${area().toFixed(2)}`}
         y={() => radius() * scale * 1.1}
         fill={white}
         ref={label2}
