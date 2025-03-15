@@ -1,6 +1,7 @@
 import {makeScene2D, Code, Layout, word, Icon, Circle, Txt, Line} from '@motion-canvas/2d';
 import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor, createSignal, Vector2} from '@motion-canvas/core';
-import { white, black, red, blue} from '../../color-palettes/five-colorful';
+import { white, black, blue} from '../../color-palettes/five-colorful';
+import { maroon} from '../../color-palettes/ten-colorful';
 import { Object } from '../../components/CellContents';
 import { appear, disappear } from '../slamaDev/utilities';
 import { CodeLinesVisual } from '../../components/LoopElements';
@@ -68,6 +69,7 @@ export default makeScene2D(function* (view) {
       offsetX={-1}
       x={-500}
       code={''}
+      zIndex={2}
     />,
   );
 
@@ -136,7 +138,8 @@ export default makeScene2D(function* (view) {
         ref={circle}
         width={() => radius() * scale * 2}
         height={() => radius() * scale * 2}
-        fill={red}
+        fill={maroon}
+        zIndex={0}
       />
       <Line
         ref={line}
@@ -144,9 +147,10 @@ export default makeScene2D(function* (view) {
           Vector2.zero,
           () => Vector2.right.scale(radius() * scale),
         ]}
-        lineDash={[20, 20]}
+        lineDash={[5, 5]}
         startArrow
         endArrow
+        arrowSize={15}
         endOffset={8}
         lineWidth={8}
         stroke={black}
