@@ -1,9 +1,10 @@
-import {makeScene2D, Code, Layout, word, Icon} from '@motion-canvas/2d';
-import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor} from '@motion-canvas/core';
-import { white, black} from '../../color-palettes/five-colorful';
+import {makeScene2D, Code, Layout, word, Icon, Circle, Txt, Line} from '@motion-canvas/2d';
+import {all, createRef, DEFAULT, easeInOutCubic, sequence, waitFor, createSignal, Vector2} from '@motion-canvas/core';
+import { white, black, red, blue} from '../../color-palettes/five-colorful';
 import { Object } from '../../components/CellContents';
 import { appear, disappear } from '../slamaDev/utilities';
 import { CodeLinesVisual } from '../../components/LoopElements';
+import { ATxt } from '../../utils/nodes/ATxt';
 
 export default makeScene2D(function* (view) {
   view.fill(white);
@@ -62,7 +63,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Code
       ref={code}
-      fontSize={42}
+      fontSize={36}
       fontFamily={'JetBrains Mono, monospace'}
       offsetX={-1}
       x={-500}
@@ -91,38 +92,121 @@ export default makeScene2D(function* (view) {
   yield* code().code('def greet() -> None:\n    print("Hello world!)', 1);
   yield* code().selection(code().findFirstRange('None'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
-  yield* code().code('def greet() -> str:\n    return "Hello world!"', 1);
-  yield* code().selection(code().findFirstRange('str'), 0.6);
-  yield* code().selection(code().findFirstRange('return'), 0.6);
-  yield* code().selection(code().findFirstRange('"Hello world!"'), 0.6);
+  // yield* code().code('def greet() -> str:\n    return "Hello world!"', 1);
+  // yield* code().selection(code().findFirstRange('str'), 0.6);
+  // yield* code().selection(code().findFirstRange('return'), 0.6);
+  // yield* code().selection(code().findFirstRange('"Hello world!"'), 0.6);
+  // yield* code().selection(DEFAULT, 0.6);
+
+  yield* code().code('def calc_circle_area(radius: float) -> float:\n    import math\n    circle_area = math.pi * radius * radius\n    return circle_area', 1);
+  yield* code().selection(code().findFirstRange('radius'), 0.6);
+  yield* code().selection(code().findFirstRange('float'), 0.6);
+  yield* code().selection(word(3, 4, 18), 0.6);
+  yield* code().selection(word(0, 39, 5), 0.6);
+  yield* code().selection(word(2, 4, 39), 0.6);
+  // yield* code().selection(code().findFirstRange('age'), 0.6);
+  // yield* code().selection(code().findFirstRange('int'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
 
-  yield* code().code('def greet(name: str, age: int) -> str:\n    return "Hello world!"', 1);
-  yield* code().selection(code().findFirstRange('name'), 0.6);
-  yield* code().selection(code().findFirstRange('str'), 0.6);
-  yield* code().selection(code().findFirstRange('age'), 0.6);
-  yield* code().selection(code().findFirstRange('int'), 0.6);
-  yield* code().selection(DEFAULT, 0.6);
-  yield* all(
-    code().code(`def greet(name: str, age: int) -> str:\n    return f"Hello! My name is {name}. I'am {age} years old."`, 1),
-    // code().code(`def greet() -> None:\n    print("Hello! My name is {name}. I'am {age} years old.`, 1),
-    code().fontSize(28, 1),
+  yield* code().y(-700, 1, easeInOutCubic);
+
+  const radius = createSignal(3);
+  const area = createSignal(() => Math.PI * radius() * radius());
+  const funcCall = createRef<Txt>();
+  const circle = createRef<Circle>();
+  const line = createRef<Line>();
+  const scale = 100;
+  const label1 = createRef<Txt>();
+  const label2 = createRef<Txt>();
+
+  view.add(
+    <ATxt
+      fill={blue}
+      text={() => `calc_circle_area(${radius().toFixed(2)})`}
+      fontSize={42}
+      zIndex={2}
+      y={700}
+      ref={funcCall}
+    />
   );
-  yield* code().selection(word(1, 32, 4), 0.6);
-  yield* code().selection(word(1, 45, 3), 0.6);
-  yield* code().selection(DEFAULT, 0.6);
-    // code().code('def greet():\n    print("Hello world!)', 1),
-  //
+
+  view.add(
+    <>
+      <Circle
+        ref={circle}
+        width={() => radius() * scale * 2}
+        height={() => radius() * scale * 2}
+        fill={red}
+      />
+      <Line
+        ref={line}
+        points={[
+          Vector2.zero,
+          () => Vector2.right.scale(radius() * scale),
+        ]}
+        lineDash={[20, 20]}
+        startArrow
+        endArrow
+        endOffset={8}
+        lineWidth={8}
+        stroke={black}
+      />
+      <ATxt
+        text={() => `radius = ${radius().toFixed(2)}`}
+        x={() => (radius() * scale) / 2}
+        y={() => radius() * scale * 0.1 }
+        fill={black}
+        ref={label1}
+      />
+      <ATxt
+        text={() => `Area = ${area().toFixed(2)}`}
+        y={() => radius() * scale * 1.1}
+        fill={white}
+        ref={label2}
+      />
+    </>,
+  );
+
+  yield* radius(5, 1);
+  yield* radius(6, 1);
+  yield* radius(2, 1);
+  yield* radius(4, 1);
+  yield* radius(1, 1);
+  yield* radius(3, 1);
+  yield* radius(10, 1);
+
   yield* all(
-    fx().children()[0].text("greet(name: str, age: int)"),
+    disappear(circle()),
+    disappear(label1()),
+    disappear(line()),
+    disappear(label2()),
+    disappear(funcCall()),
     disappear(code()),
     fx().children()[1].width(250, 1, easeInOutCubic),
     fx().children()[1].height(100, 1, easeInOutCubic),
   );
 
-  yield* fx().children()[0].text("Function", 1);
-
   yield* disappear(fx());
+  // yield* all(
+  //   code().code(`def greet(name: str, age: int) -> str:\n    return f"Hello! My name is {name}. I'am {age} years old."`, 1),
+  //   // code().code(`def greet() -> None:\n    print("Hello! My name is {name}. I'am {age} years old.`, 1),
+  //   code().fontSize(28, 1),
+  // );
+  // yield* code().selection(word(1, 32, 4), 0.6);
+  // yield* code().selection(word(1, 45, 3), 0.6);
+  // yield* code().selection(DEFAULT, 0.6);
+  //   // code().code('def greet():\n    print("Hello world!)', 1),
+  // //
+  // yield* all(
+  //   fx().children()[0].text("greet(name: str, age: int)"),
+  //   disappear(code()),
+  //   fx().children()[1].width(250, 1, easeInOutCubic),
+  //   fx().children()[1].height(100, 1, easeInOutCubic),
+  // );
+
+  // yield* fx().children()[0].text("Function", 1);
+
+  // yield* disappear(fx());
 
   yield* waitFor(1);
 });
