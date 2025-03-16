@@ -81,7 +81,6 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.6);
   yield* code().selection(code().findFirstRange('def'), 0.6);
-  // yield* code().selection(code().findFirstRange('function_name()'), 0.6);
   yield* code().selection(word(0, 4, 15), 0.6);
   yield* code().selection(word(0, 19, 1), 0.6);
   yield* code().selection(code().findFirstRange('pass'), 0.6);
@@ -94,11 +93,6 @@ export default makeScene2D(function* (view) {
   yield* code().code('def greet() -> None:\n    print("Hello world!)', 1);
   yield* code().selection(code().findFirstRange('None'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
-  // yield* code().code('def greet() -> str:\n    return "Hello world!"', 1);
-  // yield* code().selection(code().findFirstRange('str'), 0.6);
-  // yield* code().selection(code().findFirstRange('return'), 0.6);
-  // yield* code().selection(code().findFirstRange('"Hello world!"'), 0.6);
-  // yield* code().selection(DEFAULT, 0.6);
 
   yield* code().code('def calc_circle_area(radius: float) -> float:\n    import math\n    circle_area = math.pi * radius * radius\n    return circle_area', 1);
   yield* code().selection(code().findFirstRange('radius'), 0.6);
@@ -106,11 +100,9 @@ export default makeScene2D(function* (view) {
   yield* code().selection(word(3, 4, 18), 0.6);
   yield* code().selection(word(0, 39, 5), 0.6);
   yield* code().selection(word(2, 4, 39), 0.6);
-  // yield* code().selection(code().findFirstRange('age'), 0.6);
-  // yield* code().selection(code().findFirstRange('int'), 0.6);
   yield* code().selection(DEFAULT, 0.6);
 
-  yield* code().y(-700, 1, easeInOutCubic);
+  yield* code().y(-850, 1, easeInOutCubic);
 
   const radius = createSignal(3);
   const area = createSignal(() => Math.PI * radius() * radius());
@@ -127,7 +119,8 @@ export default makeScene2D(function* (view) {
       text={() => `calc_circle_area(${radius().toFixed(2)})`}
       fontSize={42}
       zIndex={2}
-      y={700}
+      y={-650}
+      x={-220}
       ref={funcCall}
     />
   );
@@ -191,26 +184,6 @@ export default makeScene2D(function* (view) {
   );
 
   yield* disappear(fx());
-  // yield* all(
-  //   code().code(`def greet(name: str, age: int) -> str:\n    return f"Hello! My name is {name}. I'am {age} years old."`, 1),
-  //   // code().code(`def greet() -> None:\n    print("Hello! My name is {name}. I'am {age} years old.`, 1),
-  //   code().fontSize(28, 1),
-  // );
-  // yield* code().selection(word(1, 32, 4), 0.6);
-  // yield* code().selection(word(1, 45, 3), 0.6);
-  // yield* code().selection(DEFAULT, 0.6);
-  //   // code().code('def greet():\n    print("Hello world!)', 1),
-  // //
-  // yield* all(
-  //   fx().children()[0].text("greet(name: str, age: int)"),
-  //   disappear(code()),
-  //   fx().children()[1].width(250, 1, easeInOutCubic),
-  //   fx().children()[1].height(100, 1, easeInOutCubic),
-  // );
-
-  // yield* fx().children()[0].text("Function", 1);
-
-  // yield* disappear(fx());
 
   yield* waitFor(1);
 });
